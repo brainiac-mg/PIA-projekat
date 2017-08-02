@@ -20,6 +20,16 @@ public class Controler implements Serializable {
     private String errormsg;
     private String usr;
     private String pass;
+    private String tip;
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+    
 
     public String getErrormsg() {
         return errormsg;

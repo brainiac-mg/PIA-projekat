@@ -22,6 +22,14 @@
                             <h:outputLabel for="password" value="Password:" />
                             <p:password id="password" value="#{controler.pass}" required="true" label="password" />
 
+                            <p:outputLabel for="console" value="Tip korisnika: " />
+                            <p:selectOneMenu id="console" value="#{controler.tip}" style="width:125px">
+                                <f:selectItem itemLabel="Pilot" itemValue="pi" />
+                                <f:selectItem itemLabel="Stjuardesa" itemValue="st" />
+                                <f:selectItem itemLabel="Administrator" itemValue="ad" />
+                                <f:selectItem itemLabel="Radnik u avio-kompaniji" itemValue="rd" />
+                            </p:selectOneMenu>
+
                             <f:facet name="footer">
                                 <p:commandButton value="Login" actionListener="#{controler.logIn}"/>
                                 <p:commandButton value="Skip" actionListener="#{controler.skip}"/>
