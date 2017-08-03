@@ -14,26 +14,25 @@
             <ui:define name="content">
                 <center>
                     <h:form>
-                        <h:outputText style ="color: red" value="#{controler.errormsg}"/>
+                        <h:outputText style ="color: red" value="#{cntrl.errormsg}"/>
                         <h:panelGrid columns="2" cellpadding="5">
                             <h:outputLabel for="username" value="Username:" />
-                            <p:inputText id="username" value="#{controler.usr}" required="true" label="username" />
+                            <p:inputText id="username" value="#{cntrl.usr}" label="username" />
 
                             <h:outputLabel for="password" value="Password:" />
-                            <p:password id="password" value="#{controler.pass}" required="true" label="password" />
+                            <p:password id="password" value="#{cntrl.pass}" label="password" />
 
                             <p:outputLabel for="console" value="Tip korisnika: " />
-                            <p:selectOneMenu id="console" value="#{controler.tip}" style="width:125px">
+                            <p:selectOneMenu id="console" value="#{cntrl.tip}" style="width:125px">
                                 <f:selectItem itemLabel="Pilot" itemValue="pi" />
                                 <f:selectItem itemLabel="Stjuardesa" itemValue="st" />
                                 <f:selectItem itemLabel="Administrator" itemValue="ad" />
                                 <f:selectItem itemLabel="Radnik u avio-kompaniji" itemValue="rd" />
                             </p:selectOneMenu>
 
-                            <f:facet name="footer">
-                                <p:commandButton value="Login" actionListener="#{controler.logIn}"/>
-                                <p:commandButton value="Skip" actionListener="#{controler.skip}"/>
-                            </f:facet>  
+                            <p:commandButton value="Login" actionListener="#{cntrl.logIn}"/>
+                            <p:commandButton value="Skip" actionListener="#{cntrl.skip}"/>
+
                         </h:panelGrid>
                     </h:form>
                 </center>

@@ -5,15 +5,25 @@
  */
 package beans;
 
+import db.Korisnici;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
  * @author Brana
  */
-@Named(value = "controler")
+@Named(value = "cntrl")
 @SessionScoped
 public class Controler implements Serializable {
 
@@ -55,13 +65,23 @@ public class Controler implements Serializable {
         this.pass = pass;
     }
     
-    public String LogIn(){
-        errormsg = "Greska";
+    public String logIn(ActionEvent actionEvent){
+        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        Session s = sf.openSession();
+        Transaction tr = s.beginTransaction();
+        Korisnici k = (Korisnici) s.load(Korisnici.class, usr);
+        System.out.print(k.getIme());
+        
+        errormsg = "Uspesno!";
         return "index";
     }
     
-    public String Skip(){
-        return "guest";
+    public void skip(ActionEvent actionEvent){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("guest.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(Controler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Controler() {

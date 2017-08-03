@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 3, 2017 1:26:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Korisnici" table="korisnici" catalog="letovi" optimistic-lock="version">
+        <id name="korIme" type="string">
+            <column name="korIme" length="100" />
+            <generator class="assigned" />
+        </id>
+        <property name="ime" type="string">
+            <column name="Ime" length="100" not-null="true" />
+        </property>
+        <property name="prezime" type="string">
+            <column name="Prezime" length="100" not-null="true" />
+        </property>
+        <property name="datumRodjenja" type="string">
+            <column name="DatumRodjenja" length="100" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
+        </property>
+        <property name="avioKomp" type="string">
+            <column name="avioKomp" length="100" not-null="true" />
+        </property>
+        <property name="lozinka" type="string">
+            <column name="lozinka" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
