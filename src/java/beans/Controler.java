@@ -31,6 +31,15 @@ public class Controler implements Serializable {
     private String usr;
     private String pass;
     private String tip;
+    private String newPass;
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
+    }
 
     public String getTip() {
         return tip;
@@ -65,7 +74,7 @@ public class Controler implements Serializable {
         this.pass = pass;
     }
     
-    public String logIn(ActionEvent actionEvent){
+    public String logIn(){
         SessionFactory sf = new Configuration().configure().buildSessionFactory();
         Session s = sf.openSession();
         Transaction tr = s.beginTransaction();
@@ -76,13 +85,38 @@ public class Controler implements Serializable {
         return "index";
     }
     
-    public void skip(ActionEvent actionEvent){
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("guest.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(Controler.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String skip(){
+        return "guest";
     }
+    
+    public String chgPass(){
+        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        Session s = sf.openSession();
+        Transaction tr = s.beginTransaction();
+        Korisnici k = (Korisnici) s.load(Korisnici.class, usr);
+        k.setLozinka(newPass);
+        s.saveOrUpdate(k);
+        s.flush();
+        tr.commit();
+        return "index.xhtml";
+    }
+    
+    public String chngPswd(){
+        if("".equals(usr)){
+            errormsg = "Niste uneli sve parametre";
+            return "index";
+        }
+        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        Session s = sf.openSession();
+        Transaction tr = s.beginTransaction();
+        Korisnici k = (Korisnici) s.load(Korisnici.class, usr);
+        if(!k.getLozinka().equals(pass)){
+            errormsg = "Pogresna lozinka";
+            return "index";
+        }
+        return "change.xhtml";
+    }
+    
     
     public Controler() {
     }
