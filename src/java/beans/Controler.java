@@ -117,6 +117,9 @@ public class Controler implements Serializable {
         return "change.xhtml";
     }
     
+    public String signUp(){
+        return "register.xhtml";
+    }
     
     public Controler() {
     }
