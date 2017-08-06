@@ -3,22 +3,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Guest</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h3 style="margin-top:0">Basic</h3>
-            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                <p:outputLabel for="console" value="Console:" />
-                <p:selectOneRadio id="console" value="#{radioView.console}">
-                    <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                    <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                    <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                </p:selectOneRadio>
-            </h:panelGrid>
-        </h:form>
+        <ui:composition template="master.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                        <p:outputLabel for="console" value="Return flight:" />
+                        <p:selectOneRadio id="console" value="#{gctrl.radio}">
+                            <f:selectItem itemLabel="Yes" itemValue="tw" />
+                            <f:selectItem itemLabel="No" itemValue="ow" />
+                            <p:ajax update="return"/>
+                        </p:selectOneRadio>
+                        <h:outputLabel for="from" value="From:" />
+                        <p:inputText id="from" value="#{gctrl.from}" label="from" />
+                        <h:outputLabel for="to" value="To:" />
+                        <p:inputText id="to" value="#{gctrl.to}" label="to" />
+
+                        <p:outputLabel for="depart" value="Departing:" />
+                        <p:calendar id="depart" value="#{gctrl.dep}" />
+
+                        <p:outputLabel for="return" value="Returning:" />
+                        <p:calendar id="return" disabled="#{gctrl.radio == 'ow'}" value="#{gctrl.ret}" />
+                        
+                        <p:outputLabel for="adults" value="Adults:"/>
+                        <p:inputNumber id="adults" value="#{gctrl.adult}" minValue="1" maxValue="8"/>
+                        
+                        <p:outputLabel for="direct" value="Direct flight:"/>
+                        <p:selectBooleanCheckbox id="direct" value="#{gctrl.direct}" />
+                        
+                        <p:commandButton value="Search" action="#{gctrl.srch()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
